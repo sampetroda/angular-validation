@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-article-editor',
   template: `
-  <input [(ngModel)]="title"> 
-  <input [(ngModel)]="title"> 
+  <input [ngModel]="title" (ngModelChange)="title=$event"> 
+  <input [ngModel]="title" (ngModelChange)="title=$event">
   <h2>{{title}}</h2>
  
   `,
