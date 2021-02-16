@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators,FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-article-editor',
   template: `
-  <p>Article title (required): </p>
-  <input [formControl]='titleControl' />
-  <button (click)="submitTitle()">Save</button>
+  <p>Article :<input [formControl]='titleControl' /> </p>
+  <p>Text :<input [formControl]='textControl' /> </p>
+  <hr/>
+  <p> preview:</p>
+  <div>
+      <p> Title={{formdata.title}} </p>
+      <p> Text={{formdata.text}} </p>
+  </div>
+  <button (click)="saveArticle()">Save</button>
 
-  <h2>{{title}}</h2>
+  <h2>{{formdata.title}}</h2>
  
   `,
   styleUrls: ['./article-editor.component.css']
@@ -15,16 +21,24 @@ import {FormControl, Validators} from '@angular/forms';
 export class ArticleEditorComponent implements OnInit {
 
   constructor() { }
-title:string ="angular ";
+  formdata:any={};
+title:string ="";
+text:string="";
 titleControl:FormControl = new FormControl(null,Validators.required);
-submitTitle():void {
-  if(this.titleControl.valid)
+textControl:FormControl = new FormControl(null,Validators.required);
+formGroup:FormGroup = new FormGroup({
+  title:this.titleControl,
+  text:this.textControl
+});
+saveArticle():void {
+  if(this.formGroup.valid)
   {
-      this.title= this.titleControl.value;
+      this.formdata= this.formGroup.value;
+     // this.text=this.
   }
   else
   {
-    alert('Title is required');
+    alert('Missing Feilds!');
   }
 }
   ngOnInit(): void {
