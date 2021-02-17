@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators,FormArray, NgForm} from '@angular/forms';
+import {FormControl, Validators,FormArray} from '@angular/forms';
 @Component({
   selector: 'app-article-editor',
   template: `
-  <form #f="ngForm" (ngSubmit)="saveArticle(f)">
+  <p>Tags : </p>
+  <ul>
+     <li *ngFor="let t of tagControls; let i=index">
+          <input [formControl]="t" />
+          <button (click)="removeTag(i)">X </button>
+     </li>
+  </ul>
 
-      <p> <input type="text" placeholder="Article title"  required /> </p>
-      <p> <input type="textarea"  placeholder="Article text" required /> </p>
-  
-   <input type="submit" value="Save" />
-  </form>
- 
-  
+  <hr/>
+  <p><button (click)="addTag()">+</button> </p>
+  <button (click)="saveArticle()">Save</button>
+  <h2>{{formdata.title}}</h2>
  
   `,
   styleUrls: ['./article-editor.component.css']
@@ -19,13 +22,31 @@ import {FormControl, Validators,FormArray, NgForm} from '@angular/forms';
 export class ArticleEditorComponent implements OnInit {
 
   constructor() { }
- 
-saveArticle(f:NgForm):void {
- console.log(f);
-
+  tagControls:FormControl[]=[];
+  formArray:FormArray =new FormArray(this.tagControls);
+  addTag():void{
+    this.formArray.push(new FormControl(null,Validators.required))
+  }
+  formdata:any={};
+title:string ="";
+text:string="";
+removeTag(idx:number):void
+{
+    this.formArray.removeAt(idx);
+}
+saveArticle():void {
+  if(this.formArray.valid)
+  {
+     // this.formdata= this.formGroup.value;
+     // this.text=this.
+     alert('validated');
+  }
+  else
+  {
+    alert('Missing Feilds!');
+  }
 }
   ngOnInit(): void {
-    
   }
 
 }
