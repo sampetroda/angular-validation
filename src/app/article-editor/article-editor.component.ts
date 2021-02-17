@@ -5,8 +5,8 @@ import {FormControl, Validators,NgForm} from '@angular/forms';
   template: `
   <form #f="ngForm" (ngSubmit)="saveArticle(f)">
 
-      <p> <input type="text" placeholder="Article title"  ngModel  /> </p>
-      <p> <input type="textarea"  placeholder="Article text" ngModel  /> </p>
+      <p> <input type="text" placeholder="Article title" name="title"  ngModel required /> </p>
+      <p> <input type="textarea"  placeholder="Article text" name="text" ngModel required  /> </p>
   
    <input type="submit" value="Save" />
   </form>
@@ -17,7 +17,14 @@ import {FormControl, Validators,NgForm} from '@angular/forms';
 export class ArticleEditorComponent implements OnInit {
 
   saveArticle(f:NgForm):void {
-    console.log(f);
+    if(f.form.valid)
+    {
+      alert('valid');
+    }
+    else
+    {
+      alert('missing fields');
+    }
    
    }
   ngOnInit(): void {
