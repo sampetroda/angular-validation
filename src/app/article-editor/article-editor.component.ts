@@ -6,16 +6,16 @@ import {FormControl, Validators,FormGroup, FormBuilder} from '@angular/forms';
   template: `
   <form [formGroup]="artcleGroup" (ngSubmit)="saveArticle()">
 
-      <p> <input type="text" placeholder="Article title" formControlName="title"  ngModel required /> </p>
-      <p> <input type="textarea"  placeholder="Article text" formControlName="text" ngModel required  /> </p>
+      <p> <input type="text" placeholder="Article title" formControlName="title"    /> </p>
+      <p> <input type="textarea"  placeholder="Article text" formControlName="text"    /> </p>
   
    <input type="submit" value="Save" />
   </form>
   <hr/>
   <form [formGroup]="loginGroup" (ngSubmit)="Login()">
 
-      <p> <input type="text" placeholder="Article title" formControlName="username"  ngModel required /> </p>
-      <p> <input type="password"  placeholder="Article text" formControlName="password" ngModel required  /> </p>
+      <p> <input type="text" placeholder="Article title" formControlName="username"    /> </p>
+      <p> <input type="password"  placeholder="Article text" formControlName="password"    /> </p>
   
    <input type="submit" value="Login" />
   </form>
